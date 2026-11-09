@@ -1,0 +1,57 @@
+@import "@fontsource-variable/public-sans";
+@import "@fontsource/barlow-condensed/600.css";
+@import "@fontsource/barlow-condensed/700.css";
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Public Sans Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+
+  --color-paper: #eceee8;   /* concrete – page background */
+  --color-card: #fbfbf8;    /* panels */
+  --color-ink: #172033;     /* text, primary actions */
+  --color-muted: #566074;   /* secondary text (5.9:1 on paper) */
+  --color-line: #c5cbbe;    /* borders */
+  --color-plate: #f5c518;   /* the licence-plate yellow */
+  --color-enter: #0e6f5c;   /* entering */
+  --color-exit: #b8420f;    /* exiting */
+  --color-danger: #b42318;
+}
+
+html, body, #root { min-height: 100%; }
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-xl px-5 text-lg font-bold
+      transition active:scale-[0.98] disabled:opacity-40 disabled:active:scale-100;
+  }
+  .btn-ink   { @apply bg-ink text-white; }
+  .btn-enter { @apply bg-enter text-white; }
+  .btn-exit  { @apply bg-exit text-white; }
+  .btn-danger{ @apply bg-danger text-white; }
+  .btn-quiet { @apply border-2 border-ink/25 bg-card text-ink; }
+  .btn-sm    { @apply min-h-10 w-auto px-4 text-base; }
+
+  .field {
+    @apply min-h-14 w-full rounded-xl border-2 border-line bg-card px-4 text-lg text-ink placeholder:text-muted/70;
+  }
+  .field-sm { @apply min-h-11 text-base; }
+  .field-label { @apply mb-1.5 block text-base font-semibold; }
+  .panel { @apply rounded-2xl border-2 border-line bg-card; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
